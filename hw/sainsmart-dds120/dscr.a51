@@ -17,9 +17,9 @@
 ;; along with this program; if not, see <http://www.gnu.org/licenses/>.
 ;;
 
-VID = 0x501d	; Manufacturer ID (0x1d50)
-PID = 0x8e60	; Product ID (0x608e)
-VER = 0x0200	; Product "version". 0x0002 == SainSmart DDS120.
+VID = 0xb504	; Manufacturer ID (0x04b5)
+PID = 0x2001	; Product ID (0x0120)
+VER = 0x0001	; Product version 0x0100
 
 .include "dscr_scope.inc"
 string_descriptor_a 3,^"SainSmart DDS120"

@@ -263,24 +263,54 @@ static BOOL set_samplerate(BYTE rate)
 }
 
 static BOOL set_calibration_pulse(BYTE fs)
-{
+{ // values for CLK_12M
 	switch (fs) {
-	case 0:		// 100Hz
+	case 105:	// 50Hz
 		RCAP2L = -10000 & 0xff;
 		RCAP2H = (-10000 & 0xff00) >> 8;
 		return TRUE;
-	case 1:		// 1kHz
+	case 106:	// 60Hz
+		RCAP2L = -8333 & 0xff;
+		RCAP2H = (-8333 & 0xff00) >> 8;
+		return TRUE;
+	case 0:		// 100Hz
+	case 110:	// 100Hz
+		RCAP2L = -5000 & 0xff;
+		RCAP2H = (-5000 & 0xff00) >> 8;
+		return TRUE;
+	case 120:	// 200Hz
+		RCAP2L = -2500 & 0xff;
+		RCAP2H = (-2500 & 0xff00) >> 8;
+		return TRUE;
+	case 150:	// 500Hz
 		RCAP2L = -1000 & 0xff;
 		RCAP2H = (-1000 & 0xff00) >> 8;
 		return TRUE;
-	case 10:	// 1kHz
-		RCAP2L = (BYTE)(-100 & 0xff);
+	case 1:		// 1kHz
+		RCAP2L = -500 & 0xff;
+		RCAP2H = (-500 & 0xff00) >> 8;
+		return TRUE;
+	case 2:		// 2kHz
+		RCAP2L = -250 & 0xff;
+		RCAP2H = (-250 & 0xff00) >> 8;
+		return TRUE;
+	case 5:		// 5kHz
+		RCAP2L = -100 & 0xff;
+		RCAP2H = (-100 & 0xff00) >> 8;
+		return TRUE;
+	case 10:	// 10kHz
+		RCAP2L = (BYTE)(-50 & 0xff);
 		RCAP2H = 0xff;
 		return TRUE;
-	case 50:	// 50kHz
-		RCAP2L = (BYTE)(-20 & 0xff);
+	case 20:	// 20kHz
+		RCAP2L = (BYTE)(-25 & 0xff);
 		RCAP2H = 0xff;
 		return TRUE;
+// setting for 50 kHz doesn't work, gives 25 kHz (interrupt fires too often?)
+//	case 50:	// 50kHz
+//		RCAP2L = (BYTE)(-10 & 0xff);
+//		RCAP2H = 0xff;
+//		return TRUE;
 	default:
 		return FALSE;
 	}
